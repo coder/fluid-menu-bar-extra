@@ -36,6 +36,10 @@ import SwiftUI
 public final class FluidMenuBarExtra {
     private let statusItem: FluidMenuBarExtraStatusItem
 
+    public var isVisible: Bool {
+        statusItem.isVisible
+    }
+
     public init(
         title: String, 
         onAppear: (() -> Void)? = nil,

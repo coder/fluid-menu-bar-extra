@@ -58,6 +58,10 @@ final class FluidMenuBarExtraStatusItem: NSObject, NSWindowDelegate {
         NSStatusBar.system.removeStatusItem(statusItem)
     }
 
+    var isVisible: Bool {
+        return self.statusItem.button?.window?.occlusionState.contains(.visible) ?? false
+    }
+
     private func didPressStatusBarButton(_ sender: NSStatusBarButton) {
         if window.isVisible {
             dismissWindow()
