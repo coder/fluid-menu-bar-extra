@@ -33,7 +33,7 @@ final class FluidMenuBarExtraStatusItem: NSObject, NSWindowDelegate {
 
         localEventMonitor = LocalEventMonitor(mask: [.leftMouseDown]) { [weak self] event in
             if let button = self?.statusItem.button, event.window == button.window, !event.modifierFlags.contains(.command) {
-                self?.didPressStatusBarButton(button)
+                self?.didPressStatusBarButton()
 
                 // Stop propagating the event so that the button remains highlighted.
                 return nil
@@ -62,7 +62,7 @@ final class FluidMenuBarExtraStatusItem: NSObject, NSWindowDelegate {
         return self.statusItem.button?.window?.occlusionState.contains(.visible) ?? false
     }
 
-    private func didPressStatusBarButton(_ sender: NSStatusBarButton) {
+    private func didPressStatusBarButton() {
         if window.isVisible {
             dismissWindow()
             return
@@ -74,6 +74,10 @@ final class FluidMenuBarExtraStatusItem: NSObject, NSWindowDelegate {
         DistributedNotificationCenter.default().post(name: .beginMenuTracking, object: nil)
         window.makeKeyAndOrderFront(nil)
         onAppear?()
+    }
+
+    func toggleVisibility() {
+        self.didPressStatusBarButton()
     }
 
     func setOpacity(_ opacity: CGFloat) {
@@ -146,9 +150,9 @@ final class FluidMenuBarExtraStatusItem: NSObject, NSWindowDelegate {
 
 extension FluidMenuBarExtraStatusItem {
     convenience init(
-        title: String, 
-        window: NSWindow, 
-        onAppear: (() -> Void)? = nil, 
+        title: String,
+        window: NSWindow,
+        onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil
     ) {
         self.init(window: window, onAppear: onAppear, onDisappear: onDisappear)
@@ -158,10 +162,10 @@ extension FluidMenuBarExtraStatusItem {
     }
 
     convenience init(
-        title: String, 
-        image: String, 
-        window: NSWindow, 
-        onAppear: (() -> Void)? = nil, 
+        title: String,
+        image: String,
+        window: NSWindow,
+        onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil
     ) {
         self.init(window: window, onAppear: onAppear, onDisappear: onDisappear)
@@ -171,10 +175,10 @@ extension FluidMenuBarExtraStatusItem {
     }
 
     convenience init(
-        title: String, 
-        systemImage: String, 
-        window: NSWindow, 
-        onAppear: (() -> Void)? = nil, 
+        title: String,
+        systemImage: String,
+        window: NSWindow,
+        onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil
     ) {
         self.init(window: window, onAppear: onAppear, onDisappear: onDisappear)

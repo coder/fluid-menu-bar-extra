@@ -41,55 +41,59 @@ public final class FluidMenuBarExtra {
     }
 
     public init(
-        title: String, 
+        title: String,
         onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> some View
     ) {
         let window = FluidMenuBarExtraWindow(title: title, content: content)
         statusItem = FluidMenuBarExtraStatusItem(
-            title: title, 
-            window: window, 
-            onAppear: onAppear, 
+            title: title,
+            window: window,
+            onAppear: onAppear,
             onDisappear: onDisappear
         )
     }
 
     public init(
-        title: String, 
-        image: String, 
+        title: String,
+        image: String,
         onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> some View
     ) {
         let window = FluidMenuBarExtraWindow(title: title, content: content)
         statusItem = FluidMenuBarExtraStatusItem(
-            title: title, 
-            image: image, 
-            window: window, 
-            onAppear: onAppear, 
+            title: title,
+            image: image,
+            window: window,
+            onAppear: onAppear,
             onDisappear: onDisappear
         )
     }
 
     public init(
-        title: String, 
-        systemImage: String, 
+        title: String,
+        systemImage: String,
         onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> some View
     ) {
         let window = FluidMenuBarExtraWindow(title: title, content: content)
         statusItem = FluidMenuBarExtraStatusItem(
-            title: title, 
-            systemImage: systemImage, 
-            window: window, 
-            onAppear: onAppear, 
+            title: title,
+            systemImage: systemImage,
+            window: window,
+            onAppear: onAppear,
             onDisappear: onDisappear
         )
     }
 
     public func setOpacity(_ opacity: CGFloat) {
         statusItem.setOpacity(opacity)
+    }
+
+    public func toggleVisibility() {
+        statusItem.toggleVisibility()
     }
 }
